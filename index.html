@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Adventure Games</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+
+    <!-- Main Header -->
+    <header id="main-header" class="hidden">
+        <a href="#" class="logo">
+            <span role="img" aria-label="Tree">🌳</span> 
+            <span class="eco-text">Eco</span>-Adventures
+        </a>
+        <button id="menu-toggle" class="menu-icon">☰</button>
+    </header>
+
+    <!-- Menu Overlay -->
+    <div id="menu-overlay" class="hidden">
+        <a href="#" onclick="window.showMainGames()">Game Menu</a>
+        <a href="#" id="about-us-link">About Us</a>
+        <a href="#" onclick="window.logOut()" class="log-out-link">Log Out</a>
+    </div>
+
+    <!-- PAGE 1: AUTHENTICATION / GENDER SELECTION -->
+    <section id="auth-page" class="page-section">
+        <div class="auth-box">
+            <h2>Welcome to Eco-Adventures!</h2>
+            <p>Please tell us who you are so we can start your journey.</p>
+            <div id="gender-selection">
+                <p>I am:</p>
+                <div class="gender-options">
+                    <button id="select-boy">I'm a Boy 👦</button>
+                    <button id="select-girl">I'm a Girl 👧</button>
+                </div>
+            </div>
+
+            <!-- Registration Form -->
+            <form id="registration-form" class="hidden">
+                <div class="avatar-display" style="font-size: 3em; margin-bottom: 10px;"></div>
+                <input type="text" id="username" placeholder="Your Name or Nickname" required>
+                <button type="submit">Start the Adventure!</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- PAGE 2: GAMES MENU -->
+    <section id="games-page" class="page-section hidden">
+        <div class="content-wrapper">
+            <!-- Game Cards Section -->
+            <div id="games-content" class="hidden-section">
+                <h2>Choose Your Eco-Mission</h2>
+                <div class="game-container">
+                    
+                    <div class="game-card">
+                        <h3>1. Sort the Trash</h3>
+                        <p>Learn where things belong: Recycle, Compost, or Trash?</p>
+                        <button class="game-button" onclick="startGame(1)">Play Game 1</button>
+                    </div>
+                    
+                    <div class="game-card">
+                        <h3>2. Clean the Park</h3>
+                        <p>Find all the litter hidden in the beautiful park scene.</p>
+                        <button class="game-button" onclick="startGame(2)">Play Game 2</button>
+                    </div>
+
+                    <div class="game-card">
+                        <h3>3. Recycle Quiz</h3>
+                        <p>Test your knowledge: Is this item recyclable or not?</p>
+                        <button class="game-button" onclick="startGame(3)">Play Game 3</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- About Us Section -->
+            <div id="about-us" class="info-section hidden-section">
+                <h3>About Our Eco-Mission</h3>
+                <p>Eco-Adventures is dedicated to making environmental education fun and engaging for kids. We believe that learning about recycling, composting, and keeping our planet clean should feel like a game!</p>
+                <p>Our games are designed with dynamic themes (boy/girl) to make the experience feel personal and exciting for every child.</p>
+                <p style="margin-top: 15px; font-weight: bold; color: var(--primary-green);">Join us in creating a healthier, happier planet for everyone!</p>
+                <button onclick="showMainGames()">Back to Games</button>
+            </div>
+        </div>
+    </section>
+
+    <!--  GAME 1 AREA: Tap to Sort -->
+    <div id="game-1-area" class="game-area hidden">
+        <div class="game-content-box">
+            <h2>Sort the Trash</h2>
+            <div class="score-display">Score: <span id="score-1">0</span></div>
+            
+            <div id="item-to-sort" role="img" aria-label="Item to sort"></div>
+            
+            <div class="sorting-buttons">
+                <button class="sort-btn" data-category="recycle">♻️ Recycle</button>
+                <button class="sort-btn" data-category="compost">🌿 Compost</button>
+                <button class="sort-btn" data-category="trash">🗑️ Trash</button>
+            </div>
+            
+            <div id="feedback-message-1" class="feedback"></div>
+            
+            <button class="back-to-menu-btn" onclick="hideGame(1)">Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- GAME 2 AREA: Clean the Park -->
+    <div id="game-2-area" class="game-area hidden">
+        <div class="game-content-box">
+            <h2>Clean the Park</h2>
+            <div class="score-display">Trash Left: <span id="score-2">0</span></div>
+            <div id="park-scene" class="park-scene"> </div>
+            <div id="park-message">Click on all the trash items to clean the park!</div>
+            <button class="back-to-menu-btn" onclick="hideGame(2)">Back to Menu</button>
+        </div>
+    </div>
+
+    <!-- GAME 3 AREA: Recyclable or Not? -->
+    <div id="game-3-area" class="game-area hidden">
+        <div class="game-content-box">
+            <h2>Recyclable or Not?</h2>
+            <div class="score-display">Score: <span id="score-3">0</span></div>
+            
+            <div id="recycle-item-display" role="img" aria-label="Recyclable item"></div>
+            
+            <div class="yes-no-buttons">
+                <button class="choice-btn large-yes" data-choice="yes">✅ YES, Recycle!</button>
+                <button class="choice-btn large-no" data-choice="no">❌ NO, Trash!</button>
+            </div>
+
+            <div id="explanation-box"></div>
+            <div id="feedback-message-3" class="feedback"></div>
+            
+            <button class="back-to-menu-btn" onclick="hideGame(3)">Back to Menu</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
